@@ -16,25 +16,29 @@
 #include <avr/pgmspace.h>
 
 /*
- * Pin definitions for ATtiny44, ATtiny84, ATtiny45, ATtiny85 and Arduino. Now onli numbers work. 
+ * Pin definitions for ATtiny44, ATtiny84, ATtiny45, ATtiny85 and Arduino.
  */
-#if defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__)
-  #define SPI_DDR_PORT 3
-  #define USCK_DD_PIN  6
-  #define DO_DD_PIN    5
-  #define DI_DD_PIN    4
+#if defined(__AVR_ATtiny24__) || defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__)
+  #define SPI_PORT   PORTA
+  #define SPI_DDR     DDRA
+  #define SPI_PIN        7
+  #define USCK_PIN       4
+  #define DO_PIN         5
+  #define DI_PIN         6
   #define __ATTINY
-#elif defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
-  #define SPI_DDR_PORT 1
-  #define USCK_DD_PIN  4
-  #define DO_DD_PIN    2
-  #define DI_DD_PIN    3
+#elif defined(__AVR_ATtiny25__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
+  #define SPI_PORT   PORTB
+  #define SPI_DDR     DDRB
+  #define SPI_PIN        4
+  #define USCK_PIN       2
+  #define DO_PIN         0
+  #define DI_PIN         1
   #define __ATTINY
 #else
-  #define SPI_DDR_PORT SS
-  #define USCK_DD_PIN  SCK
-  #define DO_DD_PIN    MOSI
-  #define DI_DD_PIN    MISO
+  #define SPI_PIN       SS
+  #define USCK_PIN     SCK
+  #define DO_PIN      MOSI
+  #define DI_PIN      MISO
 #endif
 
 
@@ -65,8 +69,8 @@ public:
   #ifndef __ATTINY							// Defined only if not ATtiny 
     inline static void attachInterrupt();
     inline static void detachInterrupt(); 	// Default
-    static void setBitOrder(uint8_t);
   #endif
+    static void setBitOrder(uint8_t);
 
   static void begin(); // Default
   static void end();
