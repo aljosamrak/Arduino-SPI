@@ -51,7 +51,7 @@ void SPIClass::begin() {
 
 void SPIClass::end() {
   #ifdef __ATTINY
-    SPI_DDR &= ~(_BV(SPI_PIN) | _BV(USCK_PIN) | _BV(DO_PIN));   pinMode(USCK_PIN, SPI_PIN, DO_PIN, INPUT)
+    SPI_DDR &= ~(_BV(SPI_PIN) | _BV(USCK_PIN) | _BV(DO_PIN));   //pinMode(USCK_PIN, SPI_PIN, DO_PIN, INPUT)
   #else
     SPCR &= ~_BV(SPE);
   #endif
